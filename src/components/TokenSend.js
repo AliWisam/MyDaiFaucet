@@ -18,9 +18,9 @@ const TokenSend = (props) => {
   async function requestAccount() {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
   }
-  async function connectWallet(){
+  // async function connectWallet(){
 
-  }
+  // }
   
 
   async function getBalance() {
