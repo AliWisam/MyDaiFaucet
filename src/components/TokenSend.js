@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Message from './Message'
 
-const tokenAddress = "0xa5f025A4237251509621886A72BE41Ba9D56A057"
+const tokenAddress = "0xC310E335d83CaF670847F148FA25aEe381f6d613"
 
 const TokenSend = (props) => {
 

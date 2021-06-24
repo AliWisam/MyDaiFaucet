@@ -20,7 +20,8 @@ contract owned {
 
 	constructor() public{
 		owner = msg.sender;
-		daitoken = DaiToken(0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735);
+// 		daitoken = DaiToken(0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735);
+        daitoken = DaiToken(0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa);
 	}
 
 	modifier onlyOwner {
@@ -42,14 +43,14 @@ contract mortal is owned {
 contract DaiFaucet is mortal {
 
 	event Send(address indexed to, uint amount);
-	event Deposit(address indexed from, uint amount);
 	// Give out Dai to anyone who asks
 	function send(address accountToSend, uint amountToSend) public {
 		// Limit withdrawal amount
-		require(amountToSend <= 0.1 ether, "big amount");
-		require(daitoken.balanceOf(address(this)) >= amountToSend,
-			"Insufficient balance in faucet for withdrawal request");
+// 		require(amountToSend <= 0.1 ether, "big amount");
+// 		require(daitoken.balanceOf(address(this)) >= amountToSend,
+// 			"Insufficient balance in faucet for withdrawal request");
 		// Send the amount to the address that requested it
+		
 		daitoken.transfer(accountToSend, amountToSend);
 		emit Send(accountToSend, amountToSend);
 	}
@@ -60,11 +61,6 @@ contract DaiFaucet is mortal {
 	    
 	}
 	
-
-	// Accept any incoming amount
-	function accetpIncoming() external payable onlyOwner {
-		emit Deposit(msg.sender, msg.value);
-	}
 }
 
 
