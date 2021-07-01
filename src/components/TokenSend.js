@@ -18,6 +18,7 @@ const TokenSend = (props) => {
   async function requestAccount() {
     await window.ethereum.request({ method: 'eth_requestAccounts' });
   }
+  
   // async function connectWallet(){
 
   // }
@@ -46,6 +47,39 @@ const TokenSend = (props) => {
     console.log(`${amount} Coins successfully sent to ${userAccount}`);
   }
 }
+
+const tokenAddress = '0x5592EC0cfb4dbc12D3aB100b257153436a1f0FEa';
+const tokenSymbol = 'DAI';
+const tokenDecimals = 18;
+const tokenImage = 'http://placekitten.com/200/300';
+
+async function AddTokenToMetamask(){
+try {
+  // wasAdded is a boolean. Like any RPC method, an error may be thrown.
+  const wasAdded = await window.ethereum.request({
+    method: 'wallet_watchAsset',
+    params: {
+      type: 'ERC20', // Initially only supports ERC20, but eventually more!
+      options: {
+        address: tokenAddress, // The address that the token is at.
+        symbol: tokenSymbol, // A ticker symbol or shorthand, up to 5 chars.
+        decimals: tokenDecimals, // The number of decimals in the token
+        image: tokenImage, // A string url of the token logo
+      },
+    },
+  });
+
+  if (wasAdded) {
+    console.log('Thanks for your interest!');
+  } else {
+    console.log('Your loss!');
+  }
+} catch (error) {
+  console.log(error);
+}
+}
+
+
     return (
         <Card style={{background: "rgba(227, 104, 222, 0.71)"}}>
         <Card.Body>
@@ -60,6 +94,7 @@ const TokenSend = (props) => {
         {console.log(userAccount)}
         <input onChange={e => setAmount(e.target.value)} placeholder="Amount" />
         <Button onClick={sendCoins} variant="success">send </Button>
+        <button onClick={AddTokenToMetamask}>AddTokenToMetamask</button>
         </div>
         </Card.Body>
         
